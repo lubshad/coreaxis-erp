@@ -1,0 +1,253 @@
+{% extends "templates/web.html" %}
+
+{% block navbar %}{% endblock %}
+{% block footer %}{% endblock %}
+{% block banner %}{% endblock %}
+
+{% block head_include %}
+{{ include_style('login.bundle.css') }}
+<link rel="stylesheet" href="/assets/coreaxis/css/login.css?v=20260526-1">
+{% endblock %}
+
+{% macro left_panel() %}
+<div class="coreaxis-login-left">
+	<div class="coreaxis-brand-lockup">
+		<span class="coreaxis-brand-mark">
+			<img src="{{ logo }}" alt="{{ app_name }}">
+		</span>
+		<span class="coreaxis-brand-name">{{ _("CoreAxis Solutions") }}</span>
+	</div>
+	<div class="coreaxis-login-copy">
+		<h1>{{ _("Business systems with sharper control.") }}</h1>
+		<p>{{ _("Sign in to manage operations, workflows, and ERP services from one secure workspace.") }}</p>
+	</div>
+	<div class="coreaxis-login-points">
+		<div>
+			<span>{{ _("Operations") }}</span>
+			<small>{{ _("Centralized process control.") }}</small>
+		</div>
+		<div>
+			<span>{{ _("Automation") }}</span>
+			<small>{{ _("Faster repeatable work.") }}</small>
+		</div>
+		<div>
+			<span>{{ _("Insight") }}</span>
+			<small>{{ _("Clearer business visibility.") }}</small>
+		</div>
+	</div>
+	<div class="coreaxis-login-footer">&copy; {{ frappe.utils.now_datetime().year }} {{ _("CoreAxis Solutions") }}</div>
+</div>
+{% endmacro %}
+
+{% macro mobile_brand() %}
+<div class="coreaxis-mobile-brand">
+	<img src="{{ logo }}" alt="{{ app_name }}">
+	<span>{{ _("CoreAxis Solutions") }}</span>
+</div>
+{% endmacro %}
+
+{% macro security_note() %}
+<div class="coreaxis-security-note">
+	<span></span>
+	{{ _("Secure access") }}
+</div>
+{% endmacro %}
+
+{% macro email_login_body() -%}
+{% if not disable_user_pass_login or (ldap_settings and ldap_settings.enabled) %}
+<div class="page-card-body">
+	<div class="form-group">
+		<label for="login_email">{{ login_label or _("Email") }}</label>
+		<div class="coreaxis-input-wrap">
+			<input type="text" id="login_email" class="form-control"
+				placeholder="{% if login_name_placeholder %}{{ login_name_placeholder }}{% else %}{{ _('jane@example.com') }}{% endif %}"
+				required autofocus autocomplete="username">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="login_password">{{ _("Password") }}</label>
+		<div class="password-field coreaxis-input-wrap">
+			<input type="password" id="login_password" class="form-control" placeholder="{{ _('Password') }}"
+				autocomplete="current-password" required>
+			<span toggle="#login_password" class="toggle-password text-muted">{{ _("Show") }}</span>
+		</div>
+	</div>
+	{% if not disable_user_pass_login %}
+	<p class="forgot-password-message">
+		<a href="#forgot">{{ _("Forgot Password?") }}</a>
+	</p>
+	{% endif %}
+</div>
+{% endif %}
+<div class="page-card-actions">
+	{% if not disable_user_pass_login %}
+	<button class="btn btn-sm btn-primary btn-block btn-login" type="submit">{{ _("Sign In") }}</button>
+	{% endif %}
+	{% if ldap_settings and ldap_settings.enabled %}
+	<button class="btn btn-sm {{ 'btn-primary' if disable_user_pass_login else 'btn-default' }} btn-block btn-login btn-ldap-login">
+		{{ _("Login with LDAP") }}</button>
+	{% endif %}
+</div>
+{% endmacro %}
+
+{% macro auth_shell(title, subtitle, body) %}
+<div class="coreaxis-login-split">
+	{{ left_panel() }}
+	<div class="coreaxis-login-right">
+		<div class="coreaxis-login-card">
+			{{ mobile_brand() }}
+			<h2>{{ title }}</h2>
+			<p class="coreaxis-subtitle">{{ subtitle }}</p>
+			{{ body }}
+			{{ security_note() }}
+		</div>
+	</div>
+</div>
+{% endmacro %}
+
+{% block page_container %}
+<div class="coreaxis-login-root">
+	<noscript>
+		<div class="text-center my-5">
+			<h4>{{ _("Javascript is disabled on your browser") }}</h4>
+			<p class="text-muted">{{ _("You need to enable JavaScript for your app to work.") }}</p>
+		</div>
+	</noscript>
+
+	<section class="for-login">
+		{% set login_body %}
+		<form class="form-signin form-login" role="form">
+			{%- if social_login or login_with_email_link -%}
+			{{ email_login_body() }}
+			<div class="social-logins text-center">
+				{% if not disable_user_pass_login or (ldap_settings and ldap_settings.enabled) %}
+				<p class="text-muted login-divider">{{ _("or") }}</p>
+				{% endif %}
+				<div class="social-login-buttons">
+					{% for provider in provider_logins %}
+					<div class="login-button-wrapper">
+						<a href="{{ provider.auth_url }}" class="btn btn-block btn-default btn-sm btn-login-option btn-{{ provider.name }}">
+							{% if provider.icon %}{{ provider.icon }}{% endif %}
+							{{ _("Continue with {0}").format(provider.provider_name) }}
+						</a>
+					</div>
+					{% endfor %}
+				</div>
+				{% if login_with_frappe_cloud_url %}
+				<div class="social-login-buttons">
+					<div class="login-button-wrapper">
+						<a href="{{ login_with_frappe_cloud_url }}" class="btn btn-block btn-default btn-sm btn-login-option btn-login-with-frappe-cloud">
+							{{ _("Login with Frappe Cloud") }}
+						</a>
+					</div>
+				</div>
+				{% endif %}
+				{% if login_with_email_link %}
+				<div class="login-with-email-link social-login-buttons">
+					<div class="login-button-wrapper">
+						<a href="#login-with-email-link" class="btn btn-block btn-default btn-sm btn-login-option btn-login-with-email-link">
+							{{ _("Login with Email Link") }}
+						</a>
+					</div>
+				</div>
+				{% endif %}
+			</div>
+			{% else %}
+				{{ email_login_body() }}
+			{%- endif -%}
+		</form>
+		{%- if not disable_signup and not disable_user_pass_login -%}
+		<div class="text-center sign-up-message">
+			{{ _("Don't have an account?") }} <a href="#signup">{{ _("Sign up") }}</a>
+		</div>
+		{%- endif -%}
+		{% endset %}
+		{{ auth_shell(_("Welcome back"), _("Sign in to your account"), login_body) }}
+	</section>
+
+	{%- if social_login -%}
+	<section class="for-email-login">
+		{% set email_body %}
+		<form class="form-signin form-login" role="form">
+			{{ email_login_body() }}
+		</form>
+		{%- if not disable_signup and not disable_user_pass_login -%}
+		<div class="text-center sign-up-message">
+			{{ _("Don't have an account?") }} <a href="#signup">{{ _("Sign up") }}</a>
+		</div>
+		{%- endif -%}
+		{% endset %}
+		{{ auth_shell(_("Sign in"), _("Use your email and password"), email_body) }}
+	</section>
+	{%- endif -%}
+
+	<section class="for-signup {{ 'signup-disabled' if disable_signup else '' }}">
+		{% set signup_body %}
+		{%- if not disable_signup -%}
+		{{ signup_form_template }}
+		{%- else -%}
+		<div class="coreaxis-disabled-state">
+			<span class="indicator gray">{{ _("Signup Disabled") }}</span>
+			<p class="text-muted">{{ _("Signups have been disabled for this website.") }}</p>
+			<a href="/" class="btn btn-primary btn-md">{{ _("Home") }}</a>
+		</div>
+		{%- endif -%}
+		{% endset %}
+		{{ auth_shell(_("Create account"), _("Get started with CoreAxis Solutions"), signup_body) }}
+	</section>
+
+	<section class="for-forgot">
+		{% set forgot_body %}
+		<form class="form-signin form-forgot hide" role="form">
+			<div class="page-card-body">
+				<div class="form-group">
+					<label for="forgot_email">{{ _("Email") }}</label>
+					<div class="coreaxis-input-wrap">
+						<input type="email" id="forgot_email" class="form-control" placeholder="{{ _('you@example.com') }}"
+							required autofocus autocomplete="username">
+					</div>
+				</div>
+			</div>
+			<div class="page-card-actions">
+				<button class="btn btn-sm btn-primary btn-block btn-forgot" type="submit">{{ _("Send reset link") }}</button>
+				<a href="#login" class="btn btn-block coreaxis-back-btn">{{ _("Back to login") }}</a>
+			</div>
+		</form>
+		{% endset %}
+		{{ auth_shell(_("Reset password"), _("We will send you a reset link"), forgot_body) }}
+	</section>
+
+	<section class="for-login-with-email-link">
+		{% set email_link_body %}
+		<form class="form-signin form-login-with-email-link hide" role="form">
+			<div class="page-card-body">
+				<div class="form-group">
+					<label for="login_with_email_link_email">{{ _("Email") }}</label>
+					<div class="coreaxis-input-wrap">
+						<input type="email" id="login_with_email_link_email" class="form-control"
+							placeholder="{{ _('you@example.com') }}" required autofocus autocomplete="username">
+					</div>
+				</div>
+			</div>
+			<div class="page-card-actions">
+				<button class="btn btn-sm btn-primary btn-block btn-login-with-email-link" type="submit">
+					{{ _("Send login link") }}</button>
+				<a href="#login" class="btn btn-block coreaxis-back-btn">{{ _("Back to login") }}</a>
+			</div>
+		</form>
+		{% endset %}
+		{{ auth_shell(_("Login with email link"), _("Receive a secure sign-in link"), email_link_body) }}
+	</section>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>{% include "templates/includes/login/login.js" %}</script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+	document.body.classList.add("coreaxis-login");
+});
+</script>
+{% endblock %}
+
+{% block sidebar %}{% endblock %}

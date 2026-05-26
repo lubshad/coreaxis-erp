@@ -1,0 +1,383 @@
+:root {
+	--coreaxis-bg: #f5f7fa;
+	--coreaxis-surface: #ffffff;
+	--coreaxis-text: #151a20;
+	--coreaxis-muted: #66707b;
+	--coreaxis-soft: #e6eaee;
+	--coreaxis-border: #c8cdd3;
+	--coreaxis-dark: #05070a;
+	--coreaxis-dark-2: #111820;
+	--coreaxis-accent: #9aa3ad;
+	--coreaxis-shadow: 0 24px 70px rgba(5, 7, 10, 0.13);
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+body.coreaxis-login {
+	background: var(--coreaxis-bg);
+	color: var(--coreaxis-text);
+	font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+	margin: 0;
+	overflow-x: hidden;
+}
+
+body.coreaxis-login main.container,
+body.coreaxis-login .page-content-wrapper,
+body.coreaxis-login .page_content,
+body.coreaxis-login .page_content > div {
+	margin: 0 !important;
+	max-width: none !important;
+	padding: 0 !important;
+	width: 100% !important;
+}
+
+.coreaxis-login-root {
+	background:
+		linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(245, 247, 250, 0.94)),
+		linear-gradient(180deg, #ffffff, #eef1f4);
+	min-height: 100vh;
+	min-height: 100dvh;
+	width: 100%;
+}
+
+.coreaxis-login-split {
+	display: grid;
+	grid-template-columns: minmax(320px, 1.05fr) minmax(420px, 0.95fr);
+	min-height: 100vh;
+	min-height: 100dvh;
+	width: 100%;
+}
+
+.coreaxis-login-left {
+	background:
+		linear-gradient(125deg, rgba(255, 255, 255, 0.08), transparent 34%),
+		linear-gradient(180deg, #111820 0%, #05070a 100%);
+	color: #ffffff;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	overflow: hidden;
+	padding: 52px 48px;
+	position: relative;
+}
+
+.coreaxis-login-left::before {
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	border-radius: 8px;
+	content: "";
+	inset: 32px;
+	pointer-events: none;
+	position: absolute;
+}
+
+.coreaxis-brand-lockup {
+	align-items: center;
+	display: flex;
+	gap: 12px;
+	margin-bottom: 32px;
+	position: relative;
+	z-index: 1;
+}
+
+.coreaxis-brand-mark {
+	align-items: center;
+	background: rgba(255, 255, 255, 0.95);
+	border: 1px solid rgba(255, 255, 255, 0.22);
+	border-radius: 8px;
+	display: inline-flex;
+	height: 50px;
+	justify-content: center;
+	padding: 5px;
+	width: 50px;
+}
+
+.coreaxis-brand-mark img,
+.coreaxis-mobile-brand img {
+	display: block;
+	height: 100%;
+	object-fit: contain;
+	width: 100%;
+}
+
+.coreaxis-brand-name {
+	color: #ffffff;
+	font-size: 17px;
+	font-weight: 800;
+}
+
+.coreaxis-login-copy {
+	max-width: 420px;
+	position: relative;
+	z-index: 1;
+}
+
+.coreaxis-login-copy h1 {
+	color: #ffffff;
+	font-size: 48px;
+	font-weight: 800;
+	letter-spacing: 0;
+	line-height: 1.03;
+	margin: 0 0 14px;
+}
+
+.coreaxis-login-copy p {
+	color: rgba(255, 255, 255, 0.72);
+	font-size: 15px;
+	line-height: 1.6;
+	margin: 0;
+	max-width: 360px;
+}
+
+.coreaxis-login-points {
+	display: grid;
+	gap: 10px;
+	margin-top: 30px;
+	max-width: 360px;
+	position: relative;
+	z-index: 1;
+}
+
+.coreaxis-login-points div {
+	background: rgba(255, 255, 255, 0.07);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: 8px;
+	padding: 13px 14px;
+}
+
+.coreaxis-login-points span {
+	color: #ffffff;
+	display: block;
+	font-size: 13px;
+	font-weight: 800;
+	margin-bottom: 4px;
+	text-transform: uppercase;
+}
+
+.coreaxis-login-points small {
+	color: rgba(255, 255, 255, 0.66);
+	display: block;
+	font-size: 13px;
+	line-height: 1.4;
+}
+
+.coreaxis-login-footer {
+	bottom: 32px;
+	color: rgba(255, 255, 255, 0.46);
+	font-size: 12px;
+	left: 48px;
+	position: absolute;
+}
+
+.coreaxis-login-right {
+	align-items: center;
+	display: flex;
+	justify-content: center;
+	padding: 32px;
+}
+
+.coreaxis-login-card {
+	background: rgba(255, 255, 255, 0.94);
+	border: 1px solid rgba(200, 205, 211, 0.82);
+	border-radius: 8px;
+	box-shadow: var(--coreaxis-shadow);
+	max-width: 430px;
+	padding: 30px;
+	width: 100%;
+}
+
+.coreaxis-mobile-brand {
+	align-items: center;
+	display: none;
+	gap: 10px;
+	margin-bottom: 22px;
+}
+
+.coreaxis-mobile-brand img {
+	background: #ffffff;
+	border: 1px solid var(--coreaxis-border);
+	border-radius: 8px;
+	height: 42px;
+	padding: 4px;
+	width: 42px;
+}
+
+.coreaxis-mobile-brand span {
+	font-size: 15px;
+	font-weight: 800;
+}
+
+.coreaxis-login-card h2 {
+	color: var(--coreaxis-text);
+	font-size: 25px;
+	font-weight: 800;
+	letter-spacing: 0;
+	margin: 0 0 6px;
+}
+
+.coreaxis-subtitle {
+	color: var(--coreaxis-muted);
+	font-size: 14px;
+	line-height: 1.5;
+	margin: 0 0 24px;
+}
+
+.coreaxis-login-card .page-card-body,
+.coreaxis-login-card .page-card-actions {
+	padding: 0;
+}
+
+.coreaxis-login-card .form-group {
+	margin-bottom: 16px;
+}
+
+.coreaxis-login-card label {
+	color: var(--coreaxis-text);
+	font-size: 13px;
+	font-weight: 700;
+	margin-bottom: 7px;
+}
+
+.coreaxis-input-wrap {
+	position: relative;
+}
+
+.coreaxis-login-card .form-control {
+	background: #ffffff;
+	border: 1px solid var(--coreaxis-border);
+	border-radius: 8px;
+	color: var(--coreaxis-text);
+	font-size: 14px;
+	height: 44px;
+	padding: 10px 12px;
+	transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.coreaxis-login-card .form-control:focus {
+	border-color: var(--coreaxis-dark-2);
+	box-shadow: 0 0 0 3px rgba(17, 24, 32, 0.12);
+}
+
+.coreaxis-login-card .password-field .toggle-password {
+	cursor: pointer;
+	font-size: 12px;
+	font-weight: 700;
+	position: absolute;
+	right: 12px;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.coreaxis-login-card .btn {
+	border-radius: 8px;
+	font-weight: 700;
+	min-height: 42px;
+}
+
+.coreaxis-login-card .btn-primary {
+	background: var(--coreaxis-dark-2);
+	border-color: var(--coreaxis-dark-2);
+	color: #ffffff;
+}
+
+.coreaxis-login-card .btn-primary:hover,
+.coreaxis-login-card .btn-primary:focus {
+	background: var(--coreaxis-dark);
+	border-color: var(--coreaxis-dark);
+}
+
+.coreaxis-login-card .btn-default,
+.coreaxis-back-btn {
+	background: #ffffff;
+	border: 1px solid var(--coreaxis-border);
+	color: var(--coreaxis-text);
+}
+
+.coreaxis-login-card .forgot-password-message,
+.coreaxis-login-card .sign-up-message {
+	font-size: 13px;
+	margin: 12px 0 0;
+}
+
+.coreaxis-login-card a {
+	color: var(--coreaxis-dark-2);
+	font-weight: 700;
+}
+
+.coreaxis-login-card .login-divider {
+	font-size: 12px;
+	margin: 18px 0 12px;
+}
+
+.coreaxis-login-card .social-login-buttons {
+	display: grid;
+	gap: 8px;
+	margin-top: 8px;
+}
+
+.coreaxis-security-note {
+	align-items: center;
+	color: var(--coreaxis-muted);
+	display: flex;
+	font-size: 12px;
+	gap: 8px;
+	justify-content: center;
+	margin-top: 20px;
+}
+
+.coreaxis-security-note span {
+	background: #2f7d46;
+	border-radius: 999px;
+	height: 8px;
+	width: 8px;
+}
+
+.coreaxis-disabled-state p {
+	margin: 10px 0 16px;
+}
+
+@media (max-width: 860px) {
+	.coreaxis-login-split {
+		display: block;
+		min-height: 100vh;
+		min-height: 100dvh;
+	}
+
+	.coreaxis-login-left {
+		display: none;
+	}
+
+	.coreaxis-login-right {
+		align-items: flex-start;
+		min-height: 100vh;
+		min-height: 100dvh;
+		padding: 20px;
+	}
+
+	.coreaxis-login-card {
+		box-shadow: 0 16px 42px rgba(5, 7, 10, 0.1);
+		margin: auto 0;
+		padding: 24px;
+	}
+
+	.coreaxis-mobile-brand {
+		display: flex;
+	}
+}
+
+@media (max-width: 420px) {
+	.coreaxis-login-right {
+		padding: 14px;
+	}
+
+	.coreaxis-login-card {
+		padding: 20px;
+	}
+
+	.coreaxis-login-card h2 {
+		font-size: 22px;
+	}
+}

@@ -1,14 +1,24 @@
 app_name = "coreaxis"
-app_title = "Coreaxis"
+app_title = "CoreAxis Solutions"
 app_publisher = "CoreAxis Solutions"
 app_description = "CoreAxis Solutions Customizations"
 app_email = "lubshad4u4@gmail.com"
 app_license = "mit"
 
+# Branding
+# --------
+
+app_logo_url = "/assets/coreaxis/images/coreaxis-favicon.png"
+
+website_context = {
+	"favicon": "/assets/coreaxis/images/coreaxis-favicon.png",
+	"splash_image": "/assets/coreaxis/images/coreaxis-splash.png",
+}
+
 # Apps
 # ------------------
 
-# required_apps = []
+required_apps = ["erpnext", "crm", "hrms", "frappe_assistant_core", "insights"]
 
 # Each item in the list will be shown as an app in the apps page
 # add_to_apps_screen = [
@@ -25,12 +35,17 @@ app_license = "mit"
 # ------------------
 
 # include js, css files in header of desk.html
-# app_include_css = "/assets/coreaxis/css/coreaxis.css"
+app_include_css = "/assets/coreaxis/css/coreaxis.css"
 # app_include_js = "/assets/coreaxis/js/coreaxis.js"
 
 # include js, css files in header of web template
-# web_include_css = "/assets/coreaxis/css/coreaxis.css"
+web_include_css = "/assets/coreaxis/css/coreaxis.css"
 # web_include_js = "/assets/coreaxis/js/coreaxis.js"
+
+# Email Branding
+# --------------
+
+email_css = "/assets/coreaxis/css/coreaxis_email.css"
 
 # include custom scss in every website theme (without file extension ".scss")
 # website_theme_scss = "coreaxis/public/scss/website"
@@ -86,13 +101,13 @@ app_license = "mit"
 # ------------
 
 # before_install = "coreaxis.install.before_install"
-# after_install = "coreaxis.install.after_install"
+after_install = "coreaxis.setup.install.after_install"
 
 # Uninstallation
 # ------------
 
 # before_uninstall = "coreaxis.uninstall.before_uninstall"
-# after_uninstall = "coreaxis.uninstall.after_uninstall"
+after_uninstall = "coreaxis.setup.install.after_uninstall"
 
 # Integration Setup
 # ------------------
@@ -258,4 +273,3 @@ require_type_annotated_api_methods = True
 # ------------
 # List of apps whose translatable strings should be excluded from this app's translations.
 # ignore_translatable_strings_from = []
-

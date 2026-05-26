@@ -1,0 +1,28 @@
+/* CoreAxis Solutions global brand styles. Keep selectors narrow for Desk safety. */
+
+html body div.centered.splash {
+	background: #ffffff !important;
+}
+
+html body div.centered.splash img {
+	max-width: 96px !important;
+	max-height: 96px !important;
+	object-fit: contain !important;
+	border-radius: 8px !important;
+	box-shadow: 0 18px 44px rgba(5, 7, 10, 0.12) !important;
+}
+
+.navbar .app-logo,
+.navbar .navbar-brand img,
+.desk-sidebar .standard-sidebar-label img {
+	object-fit: contain;
+}
+
+.navbar .app-logo,
+.navbar .navbar-brand img {
+	max-height: 28px;
+}
+
+body[data-route^="Workspaces"] .standard-sidebar .standard-sidebar-item.selected {
+	border-radius: 8px;
+}

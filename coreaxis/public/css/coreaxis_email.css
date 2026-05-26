@@ -1,0 +1,34 @@
+/* CoreAxis Solutions email branding */
+
+.email-header {
+	background: #05070a;
+	border-bottom: 1px solid #c8cdd3;
+	padding: 24px;
+	text-align: center;
+}
+
+.email-header img {
+	height: 44px;
+	width: auto;
+	object-fit: contain;
+}
+
+.email-body {
+	color: #151a20;
+	font-family: "Segoe UI", Arial, sans-serif;
+	line-height: 1.6;
+}
+
+.email-footer {
+	background: #f5f7fa;
+	border-top: 1px solid #c8cdd3;
+	color: #626b75;
+	font-size: 12px;
+	padding: 16px 24px;
+	text-align: center;
+}
+
+.email-footer a {
+	color: #111820;
+	text-decoration: none;
+}
